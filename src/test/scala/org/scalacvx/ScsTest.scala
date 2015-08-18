@@ -6,7 +6,7 @@ package org.scalacvx
 
 import org.scalatest._
 import org.scs._
- 
+
 
 
 class ScsTest extends FlatSpec with Matchers {
