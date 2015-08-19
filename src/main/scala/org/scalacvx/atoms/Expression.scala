@@ -1,5 +1,6 @@
 package org.scalacvx.atoms
 
+import org.scalacvx.conic.ConicForm
 import org.scalacvx.dcp.{ConstantVexity, Monotonicity, Sign, Vexity}
 import org.scalacvx.structures.SparseMatrix
 
@@ -18,6 +19,8 @@ trait Expression {
   val evaluate: SparseMatrix
   val sign: Sign
 
-  val vexity:Vexity = ??? //if(children.isDefined) children.get.foldLeft[Vexity](curvature){(a:Vexity,b:Vexity) => a + b} else curvature
+  val vexity:Vexity =
+    if(children.isDefined) children.get.foldLeft[Vexity](curvature){(v,e) => v + e.vexity} else curvature
 
+  val conicForm:ConicForm
 }

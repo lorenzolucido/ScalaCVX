@@ -15,8 +15,9 @@ case class Constant(value:SparseMatrix, override val sign:Sign) extends Expressi
 
   override val vexity: Vexity = ConstantVexity
   override val curvature = NotDcp // Should never reach here: a constant is not a function
-  override val monotonicity:Monotonicity = ConstantMonotonicity // Should not be used ?
+  override val monotonicity:Monotonicity = NoMonotonicity // Should not be reached
   override val evaluate = value
 
+  override val conicForm = ???
 
 }
