@@ -19,7 +19,7 @@ trait Problem {
     val objectiveVex = if(problemType == MinimizationProblem) objective.vexity else -objective.vexity
     val constraintVex = constraints.map(c => c.vexity).foldLeft[Vexity](ConstantVexity) {(a, b) => a + b }
 
-    // Need to check if this is convex
+    // Todo: Need to check if this is convex
     objectiveVex + constraintVex
   }
 

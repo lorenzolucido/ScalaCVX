@@ -1,12 +1,24 @@
 package org.scalacvx.conic
 
+import org.scalacvx.atoms.Expression
+import org.scalacvx.constraints.Constraint
 import org.scalacvx.structures.SparseMatrix
 
 /**
- * Created by lorenzo on 8/16/15.
+ * Conic Form (i.e. graph form of a convex optimization problem)
+ *
+ *    minimize    c'x
+ *    subject to  Ax = b
+ *                x in K
+ *    (K being a convex cone - zero, free, positive orthant, second order, semidefinite, exponential)
+ *
+ *
  */
-case class ConicForm(m: Map[Int,SparseMatrix]) {
+case class ConicForm(objective: Expression, constraints:Array[Constraint]) {
 
+
+
+  /*
   def unary_- = ConicForm(m map {case (i,sp) => (-1*i,sp)})
 
   def +(that:ConicForm):ConicForm = ???
@@ -16,7 +28,7 @@ case class ConicForm(m: Map[Int,SparseMatrix]) {
   def *(v:SparseMatrix) = ConicForm(m map {case (i, sp) => (i, sp * v)}) // * to be defined in SparseMatrix
 
   def promoteSize(vectorized_size:Int) = ???
-
+  */
 }
 
 /*
