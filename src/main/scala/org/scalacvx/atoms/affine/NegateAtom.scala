@@ -13,11 +13,10 @@ case class NegateAtom(expr:Expression) extends Expression {
   override lazy val length: Int = expr.length
   override lazy val conicForm: ConicForm = ???
   override val size: (Int, Int) = expr.size
-  override val children: Option[Array[Expression]] = Some(Array(expr))
+  override val children = Some(Array(ChildExpression(expr, NonIncreasing)))
   override val sign: Sign = - expr.sign
   override lazy val evaluate = - expr.evaluate
   override val curvature: Vexity = ConstantVexity
-  override val monotonicity: Monotonicity = NonIncreasing
 
 
 }

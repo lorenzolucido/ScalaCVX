@@ -16,11 +16,10 @@ case class AddAtom(lhs:Expression, rhs:Expression) extends Expression {
 
   override lazy val conicForm: ConicForm = ???
 
-  override val children: Option[Array[Expression]] = Some(Array(lhs, rhs))
+  override val children = Some(Array(ChildExpression(lhs, NonDecreasing),ChildExpression(rhs, NonDecreasing)))
   override val sign: Sign = lhs.sign + rhs.sign
   override lazy val evaluate: DenseMatrix[Double] = lhs.evaluate + rhs.evaluate
   override val curvature: Vexity = ConstantVexity
-  override val monotonicity: Monotonicity = NonDecreasing // This is not right, there should be as many Monotonicities as children
 
 
 
