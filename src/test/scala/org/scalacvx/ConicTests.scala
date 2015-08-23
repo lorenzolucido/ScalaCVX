@@ -2,8 +2,7 @@ package org.scalacvx
 
 import breeze.linalg.DenseMatrix._
 import breeze.linalg.{DenseVector, DenseMatrix}
-import org.scalacvx.conic.ConicEpigraphForm
-import org.scalacvx.constraints.{ConeType, SecondOrderCone}
+import org.scalacvx.conic.{ConeType, SecondOrderCone, ConicForm}
 import org.scalatest.{Matchers, FlatSpec}
 
 /**
@@ -18,10 +17,11 @@ class ConicTests extends FlatSpec with Matchers {
     val b = Array(DenseVector(1.0, 2.0))
     val K = Array[ConeType](SecondOrderCone)
 
-    val f = ConicEpigraphForm(C, d, A, b, K)
+    // Tests to be rewritten
+    //val f = ConicForm(C, d, A, b, K)
 
-    val g = f o f // Used in order to test that matrix multiplications are correct
-    println(g)
+    //val g = f o f // Used in order to test that matrix multiplications are correct
+    //println(g)
   }
 
 }

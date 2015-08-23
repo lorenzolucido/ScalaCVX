@@ -2,10 +2,9 @@ package org.scalacvx.atoms
 
 import breeze.linalg.DenseMatrix
 import org.scalacvx.atoms.affine.{AddAtom, NegateAtom}
-import org.scalacvx.conic.{ConicEpigraphForm, ConicForm}
+import org.scalacvx.conic.ConicForm
 import org.scalacvx.constraints.{GtConstraint, LtConstraint, EqualityConstraint}
 import org.scalacvx.dcp._
-import org.scalacvx.structures.SparseMatrix
 
 /**
  * Created by lorenzo on 8/16/15.
@@ -16,18 +15,20 @@ trait Expression {
 
   val size: (Int, Int)
   val children:Option[Array[ChildExpression]]
-  //val monotonicity: Monotonicity
-  val curvature: Vexity
+
   val evaluate: DenseMatrix[Double]
   val sign: Sign
+
+  val canonicalize:ConicForm
+  val curvature: Vexity
 
   lazy val length = size._1 * size._2
   lazy val vexity:Vexity =
     if (children.isDefined) children.get.foldLeft[Vexity](curvature) { (v, e) => v + e.expr.vexity } else curvature
 
-  //val graphRepr:ConicEpigraphForm
-
-  lazy val conicForm: ConicForm = ??? // if (graphRepr == this) this else graphRepr o children.get(0).graphRepr
+  lazy val conicForm: ConicForm = {
+    ???
+  }
 
   // Constraints
   def ==(that:Expression) = EqualityConstraint(this, that)

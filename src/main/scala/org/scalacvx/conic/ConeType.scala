@@ -1,11 +1,8 @@
-package org.scalacvx.constraints
+package org.scalacvx.conic
 
-import org.scalacvx.conic.ConicObject
-
-
-// This class encodes constraint such as x in K, K being a convex cone.
-case class ConicConstraint(objects:Array[ConicObject], cone:ConeType, sizes:Array[Int])
-
+/**
+ * Created by lorenzo on 8/23/15.
+ */
 sealed trait ConeType
 case object ExponentialCone     extends ConeType
 case object SemidefiniteCone    extends ConeType

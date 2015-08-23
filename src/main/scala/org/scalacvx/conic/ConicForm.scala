@@ -2,7 +2,7 @@ package org.scalacvx.conic
 
 import breeze.linalg.{DenseMatrix, DenseVector}
 import org.scalacvx.atoms.Expression
-import org.scalacvx.constraints.{ConeType, Constraint}
+import org.scalacvx.constraints.Constraint
 import org.scalacvx.dcp.{ConstantVexity, AffineVexity}
 import breeze.linalg.DenseMatrix._
 
@@ -24,23 +24,35 @@ import breeze.linalg.DenseMatrix._
  */
 
 
-case class ConicEpigraphForm(
-  C:DenseMatrix[Double], d:DenseVector[Double],
-  A:Array[DenseMatrix[Double]], b:Array[DenseVector[Double]], K:Array[ConeType]) {
+case class ConicForm(objective:Expression, constraints:Array[Constraint]){
+  require(objective.vexity == AffineVexity) // && constraints are affine or belongs to convex cone
 
-  require(A.length > 0 && A.length == b.length && b.length == K.length)
 
-  // ConicEpigraph function composition (f o g)
-  def o(that: ConicEpigraphForm) = ConicEpigraphForm(
-      C.t * horzcat(that.C, eye[Double](that.C.rows)),                // C_fog = Cf * [ Cg I ]
-      C.t * that.d + d,                                               // d_fog = Cf * dg + df
-      (A(0).t * horzcat(that.C, eye[Double](that.C.rows))) +: that.A, // A_fog = ...
-      (A(0).t * that.d + b(0)) +: that.b,                             // b_fog = ... |
-      K ++ that.K                                                     // K_fog = [Kf, Kg]
-  )
+
+
+
+
 }
 
 
+/*
+ C:DenseMatrix[Double], d:DenseVector[Double],
+ A:Array[DenseMatrix[Double]], b:Array[DenseVector[Double]], K:Array[ConeType]) {
+
+ require(A.length > 0 && A.length == b.length && b.length == K.length)
+
+ // ConicEpigraph function composition (f o g)
+ def o(that: ConicForm) = ConicForm(
+     C.t * horzcat(that.C, eye[Double](that.C.rows)),                // C_fog = Cf * [ Cg I ]
+     C.t * that.d + d,                                               // d_fog = Cf * dg + df
+     (A(0).t * horzcat(that.C, eye[Double](that.C.rows))) +: that.A, // A_fog = ...
+     (A(0).t * that.d + b(0)) +: that.b,                             // b_fog = ... |
+     K ++ that.K                                                     // K_fog = [Kf, Kg]
+ )
+ */
+
+
+/*
 case class ConicForm(objective: Expression, constraints:Option[Array[Constraint]]) {
   require(objective.vexity == AffineVexity)
 
@@ -69,4 +81,6 @@ object ConicForm {
 }
 
 case class UniqueConicForms(exp_map:UniqueExpMap, constr_map:UniqueConstrMap, constr_list:UniqueConstrList)
+*/
+
 */

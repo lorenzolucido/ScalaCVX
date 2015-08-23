@@ -1,7 +1,7 @@
 package org.scalacvx.constraints
 
-import org.scalacvx.atoms.Expression
-import org.scalacvx.conic.ConicForm
+import org.scalacvx.atoms.{Variable, Expression}
+import org.scalacvx.conic.{ConeType, ConicForm}
 import org.scalacvx.dcp._
 
 /**
@@ -12,9 +12,10 @@ sealed trait Constraint {
   val lhs: Expression
   val rhs: Expression
   val vexity:Vexity
-  //val conicForm:ConicForm // To be implemented
 
 }
+
+
 
 case class EqualityConstraint(lhs:Expression, rhs:Expression) extends Constraint {
   require(lhs.size == rhs.size,
@@ -44,4 +45,11 @@ case class GtConstraint(lhs:Expression, rhs:Expression) extends Constraint {
     case ConvexVexity => NotDcp
     case _ => lhs.vexity - rhs.vexity
   }
+}
+
+case class ConeConstraint(variable:Variable, cone:ConeType) extends Constraint{
+  override val lhs = ???
+  override val rhs = ???
+  override val vexity = ???
+
 }
