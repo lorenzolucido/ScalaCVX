@@ -24,4 +24,11 @@ case class EqualityConstraint(lhs:Expression, rhs:Expression) extends Constraint
   }
 
   val conicForm = ???
+
+
+}
+
+
+object EqualityConstraint {
+
 }
