@@ -1,27 +1,28 @@
 package org.scalacvx
 
 import org.scalacvx.atoms.Expression
+import org.scalacvx.conic.ConicForm
 import org.scalacvx.constraints.Constraint
-import org.scalacvx.dcp.{ConstantVexity, Vexity}
+import org.scalacvx.dcp.{AffineVexity, ConvexVexity, ConstantVexity, Vexity}
 
 
-trait Problem {
-  val problemType: ProblemType
-  val objective: Expression
-  val constraints: Iterable[Constraint]
+case class Problem(problemType: ProblemType, objective: Expression, constraints:Array[Constraint]) {
+  // In Convex.jl, the problem class contains the solution. Can we do better ?
 
-  def status:ProblemStatus = this.solution.status
-  def optval = this.solution.optval
-  def model = ???
-  def solution: Solution[Float] = ???
+
+  // def model = ???
 
   def vexity:Vexity = {
     val objectiveVex = if(problemType == MinimizationProblem) objective.vexity else -objective.vexity
     val constraintVex = constraints.map(c => c.vexity).foldLeft[Vexity](ConstantVexity) {(a, b) => a + b }
 
-    // Todo: Need to check if this is convex
-    objectiveVex + constraintVex
+    objectiveVex + constraintVex match {
+      case ConvexVexity | AffineVexity => objectiveVex + constraintVex
+      case _ => throw new Exception("Problem not DCP compliant")
+    }
   }
+
+  val conicForm:ConicForm = ???
 
 }
 
