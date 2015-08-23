@@ -22,10 +22,16 @@ case class Problem(problemType: ProblemType, objective: Expression, constraints:
     }
   }
 
-  val conicForm:ConicForm = ???
+  lazy val conicForm:ConicForm = ???
 
+  def subjectTo(const:Constraint) = Problem(problemType, objective, constraints :+ const)
+  def subjectTo(consts:Array[Constraint]) = Problem(problemType, objective, constraints ++ consts)
 }
 
+object Problem {
+  def minimize(expr:Expression) = Problem(MinimizationProblem, expr, Array[Constraint]())
+  def maximize(expr:Expression) = Problem(MaximizationProblem, expr, Array[Constraint]())
+}
 
 sealed trait ProblemType
 case object MinimizationProblem extends ProblemType

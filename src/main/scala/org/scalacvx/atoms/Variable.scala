@@ -13,8 +13,6 @@ case class Variable(size:(Int,Int), sign:Sign=NoSign, value:Option[DenseMatrix[D
   override val children = None
   override val curvature: Vexity = AffineVexity
 
-  override val monotonicity: Monotonicity = NoMonotonicity
-
   override lazy val evaluate: DenseMatrix[Double] =
     if(value.isDefined) value.get else throw new NoSuchElementException("Value yet to be calculated")
 
