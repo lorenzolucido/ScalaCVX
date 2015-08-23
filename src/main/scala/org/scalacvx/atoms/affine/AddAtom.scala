@@ -2,7 +2,6 @@ package org.scalacvx.atoms.affine
 
 import breeze.linalg.DenseMatrix
 import org.scalacvx.atoms.Expression
-import org.scalacvx.conic.ConicForm
 import org.scalacvx.dcp._
 
 /**
@@ -14,7 +13,7 @@ case class AddAtom(lhs:Expression, rhs:Expression) extends Expression {
   override val size: (Int, Int) = lhs.size
   override lazy val length: Int = lhs.length
 
-  override lazy val conicForm: ConicForm = ???
+  override lazy val canonicalize = ???
 
   override val children = Some(Array(ChildExpression(lhs, NonDecreasing),ChildExpression(rhs, NonDecreasing)))
   override val sign: Sign = lhs.sign + rhs.sign

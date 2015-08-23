@@ -9,9 +9,6 @@ import org.scalacvx.dcp.{AffineVexity, ConvexVexity, ConstantVexity, Vexity}
 case class Problem(problemType: ProblemType, objective: Expression, constraints:Array[Constraint]) {
   // In Convex.jl, the problem class contains the solution. Can we do better ?
 
-
-  // def model = ???
-
   def vexity:Vexity = {
     val objectiveVex = if(problemType == MinimizationProblem) objective.vexity else -objective.vexity
     val constraintVex = constraints.map(c => c.vexity).foldLeft[Vexity](ConstantVexity) {(a, b) => a + b }
@@ -22,7 +19,13 @@ case class Problem(problemType: ProblemType, objective: Expression, constraints:
     }
   }
 
-  lazy val conicForm:ConicForm = ???
+  // The conic form of the problem reduces to convert the objective to a linear function
+  // and the constraints to linear inequalities or inclusion in convex cone
+  lazy val conicForm:ConicForm = {
+    if(objective.vexity == AffineVexity && constraints.forall(c => c.vexity == AffineVexity)) ConicForm(objective,constraints)
+    else ???
+  }
+
 
   def subjectTo(const:Constraint) = Problem(problemType, objective, constraints :+ const)
   def subjectTo(consts:Array[Constraint]) = Problem(problemType, objective, constraints ++ consts)

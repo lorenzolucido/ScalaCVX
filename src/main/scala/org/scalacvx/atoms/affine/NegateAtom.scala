@@ -1,9 +1,7 @@
 package org.scalacvx.atoms.affine
 
 import org.scalacvx.atoms.Expression
-import org.scalacvx.conic.ConicForm
 import org.scalacvx.dcp._
-import org.scalacvx.structures.SparseMatrix
 
 /**
  * Created by lorenzo on 8/23/15.
@@ -11,7 +9,7 @@ import org.scalacvx.structures.SparseMatrix
 case class NegateAtom(expr:Expression) extends Expression {
 
   override lazy val length: Int = expr.length
-  override lazy val conicForm: ConicForm = ???
+  override lazy val canonicalize = ???
   override val size: (Int, Int) = expr.size
   override val children = Some(Array(ChildExpression(expr, NonIncreasing)))
   override val sign: Sign = - expr.sign

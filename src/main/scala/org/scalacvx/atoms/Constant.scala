@@ -1,9 +1,7 @@
 package org.scalacvx.atoms
 
 import breeze.linalg.DenseMatrix
-import org.scalacvx.conic.ConicForm
 import org.scalacvx.dcp._
-import org.scalacvx.structures.SparseMatrix
 
 /**
  * Created by lorenzo on 8/18/15.
@@ -20,7 +18,7 @@ case class Constant(value:DenseMatrix[Double], override val sign:Sign) extends E
 
   override val evaluate = value
 
-  override lazy val conicForm = ConicForm(this, None)
+  override lazy val canonicalize = ???
 }
 
 object Constant {

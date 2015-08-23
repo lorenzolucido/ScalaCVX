@@ -1,9 +1,7 @@
 package org.scalacvx.atoms
 
 import breeze.linalg.DenseMatrix
-import org.scalacvx.conic.ConicForm
 import org.scalacvx.dcp._
-import org.scalacvx.structures.SparseMatrix
 
 /**
  * Created by lorenzo on 8/16/15.
@@ -17,7 +15,7 @@ case class Variable(size:(Int,Int), sign:Sign=NoSign, value:Option[DenseMatrix[D
     if(value.isDefined) value.get else throw new NoSuchElementException("Value yet to be calculated")
 
 
-  override lazy val conicForm = ConicForm(this, None)
+  override lazy val canonicalize = ???
 }
 
 
