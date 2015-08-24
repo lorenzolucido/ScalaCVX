@@ -7,17 +7,16 @@ import org.scalacvx.dcp._
 /**
  * Created by lorenzo on 8/16/15.
  */
-sealed trait Constraint {
+sealed trait Constraint
 
+trait SignedConstraint extends Constraint {
   val lhs: Expression
   val rhs: Expression
   val vexity:Vexity
-
+  val expression = lhs - rhs
 }
 
-
-
-case class EqualityConstraint(lhs:Expression, rhs:Expression) extends Constraint {
+case class EqualityConstraint(lhs:Expression, rhs:Expression) extends SignedConstraint {
   require(lhs.size == rhs.size,
     s"Cannot create equality constraint between expressions of size ${lhs.size} and ${rhs.size}")
 
@@ -27,7 +26,7 @@ case class EqualityConstraint(lhs:Expression, rhs:Expression) extends Constraint
     }
 }
 
-case class LtConstraint(lhs:Expression, rhs:Expression) extends Constraint {
+case class LtConstraint(lhs:Expression, rhs:Expression) extends SignedConstraint {
   require(lhs.size == rhs.size,
     s"Cannot create inequality constraint between expressions of size ${lhs.size} and ${rhs.size}")
 
@@ -37,7 +36,7 @@ case class LtConstraint(lhs:Expression, rhs:Expression) extends Constraint {
   }
 }
 
-case class GtConstraint(lhs:Expression, rhs:Expression) extends Constraint {
+case class GtConstraint(lhs:Expression, rhs:Expression) extends SignedConstraint {
   require(lhs.size == rhs.size,
     s"Cannot create inequality constraint between expressions of size ${lhs.size} and ${rhs.size}")
 
@@ -48,8 +47,5 @@ case class GtConstraint(lhs:Expression, rhs:Expression) extends Constraint {
 }
 
 case class ConeConstraint(variable:Variable, cone:ConeType) extends Constraint{
-  override val lhs = ???
-  override val rhs = ???
-  override val vexity = ???
 
 }
