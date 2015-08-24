@@ -2,9 +2,10 @@ package org.scalacvx.conic
 
 import breeze.linalg.{DenseMatrix, DenseVector}
 import org.scalacvx.atoms.Expression
-import org.scalacvx.constraints.Constraint
+import org.scalacvx.constraints.{SignedConstraint, ConeConstraint, Constraint}
 import org.scalacvx.dcp.{ConstantVexity, AffineVexity}
-import breeze.linalg.DenseMatrix._
+//import org.scalacvx.atoms.Expression._
+import org.scalacvx.conic.ConicForm._
 
 /**
  * Conic Form (i.e. graph form of a convex optimization problem)
@@ -24,16 +25,35 @@ import breeze.linalg.DenseMatrix._
  */
 
 
-case class ConicForm(objective:Expression, constraints:Array[Constraint]){
-  require(objective.vexity == AffineVexity) // && constraints are affine or belongs to convex cone
+case class ConicForm(objective:Expression, constraints:Array[SignedConstraint]=Array(), cones:Array[ConeConstraint]=Array()){
 
+  val isObjectiveValid = objective.vexity == AffineVexity || objective.vexity == ConstantVexity
+  val areConstraintsValid =
+    if(constraints.isEmpty) true
+    else constraints.forall(c => c.vexity == AffineVexity || c.vexity == ConstantVexity)
 
+  val isValid = isObjectiveValid && areConstraintsValid
 
+  val canonicalize:ConicForm =
+    if(isValid) this
+    else objective.canonicalize + sum(constraints.map(c => c.expression.canonicalize):_*)
+    // Sounds wrong: we lose the type of signed constraint by doing this.
 
+  def +(that:ConicForm): ConicForm = ConicForm (
+    this.objective + that.objective,
+    this.constraints ++ that.constraints,
+    this.cones ++ that.cones
+  )
 
+  def unary_- = ConicForm(- this.objective, this.constraints, this.cones)
+  def -(that:ConicForm) = this + (-that)
 
 }
 
+object ConicForm {
+  def sum(c:ConicForm*):ConicForm = if(c.size == 1) c(0) else c(0) + sum(c.drop(1):_*)
+  //def sum(c:Seq[ConicForm]):ConicForm = sum(c:_*)
+}
 
 /*
  C:DenseMatrix[Double], d:DenseVector[Double],
