@@ -5,4 +5,4 @@ jdk:
   - oraclejdk8
 
 before_install:
-  - sudo apt-get install libblas3
+  - sudo apt-get install libblas*
