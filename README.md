@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lorenzolucido/ScalaCVX.svg?branch=lorenzo-dev)](https://travis-ci.org/lorenzolucido/ScalaCVX)
+
 # ScalaCVX
 
 ##### Version: 0.0.1

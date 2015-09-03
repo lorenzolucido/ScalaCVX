@@ -1,9 +1,9 @@
 language: scala
 
-before_script:
-   - sudo apt-get install libatlas3-base
+#before_script:
+#   - sudo apt-get install libatlas3-base
 #   - sudo apt-get install liblapack*
-   - sudo update-alternatives --display libblas.so.3
+#   - sudo update-alternatives --display libblas.so.3
 
 scala:
    - 2.11.7
