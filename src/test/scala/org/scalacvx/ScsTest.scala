@@ -12,7 +12,7 @@ import org.scs._
 class ScsTest extends FlatSpec with Matchers {
 
 
-  "A solver" should "solve a random linear program" in {
+  "SCS solver" should "solve a random linear program" in {
     val m = 50
     val n = 30
 
