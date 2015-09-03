@@ -1,7 +1,7 @@
 language: scala
 
 before_script:
-   - sudo apt-get install libopenblas-base
+   - sudo apt-get install libatlas3-base
 #   - sudo apt-get install liblapack*
    - sudo update-alternatives --display libblas.so.3
 
