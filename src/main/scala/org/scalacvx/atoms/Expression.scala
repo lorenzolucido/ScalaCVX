@@ -27,7 +27,8 @@ trait Expression {
   lazy val vexity:Vexity =
     if (children.isDefined) children.get.foldLeft[Vexity](curvature) { (v, e) => v + e.expr.vexity } else curvature
 
-  lazy val conicForm: ConicForm = ???
+  lazy val conicForm: ConicForm =
+    if (children.isDefined) children.get.foldLeft[ConicForm](canonicalize) { (v, e) => v + e.expr.conicForm } else canonicalize
 
   // Constraints
   def ==(that:Expression) = EqualityConstraint(this, that)
