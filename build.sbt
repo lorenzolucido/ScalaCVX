@@ -7,6 +7,7 @@ scalaVersion := "2.11.7"
 resolvers ++= Seq(
   // other resolvers here
   // if you want to use snapshot builds (currently 0.12-SNAPSHOT), use this.
+  Classpaths.sbtPluginReleases,
   "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/",
   "Sonatype Releases" at "https://oss.sonatype.org/content/repositories/releases/"
 )
@@ -25,3 +26,12 @@ libraryDependencies  ++= Seq(
   // It depends on LGPL code.
   "org.scalanlp" %% "breeze-viz" % "0.11.2"
 )
+
+ScoverageSbtPlugin.ScoverageKeys.coverageMinimum := 70
+
+ScoverageSbtPlugin.ScoverageKeys.coverageFailOnMinimum := false
+
+ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := {
+  if(scalaBinaryVersion.value == "2.11") true
+  else false
+}
