@@ -1,8 +1,12 @@
 language: scala
+
+before_script:
+   - sudo apt-get install libblas*
+   - sudo apt-get install liblapack*
+
 scala:
    - 2.11.7
+
 jdk:
   - oraclejdk8
 
-before_install:
-  - sudo apt-get install libblas*
