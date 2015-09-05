@@ -4,7 +4,7 @@ before_install:
    - sudo apt-get install libblas*
    - sudo apt-get install liblapack*
 
-install: ./install-dependencies.sh
+install: ./bin/install-dependencies.sh
 
 scala:
    - 2.11.7
