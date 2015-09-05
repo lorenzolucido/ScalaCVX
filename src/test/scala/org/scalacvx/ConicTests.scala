@@ -15,7 +15,7 @@ class ConicTests extends FlatSpec with Matchers {
   val yVar = Variable()
 
   "A conic form" should "be composable" in {
-    println(xVar.canonicalize + yVar.canonicalize)
+    //println(xVar.canonicalize + yVar.canonicalize)
 
   }
 
