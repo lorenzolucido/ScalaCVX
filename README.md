@@ -1,6 +1,6 @@
 # ScalaCVX  [![Build Status](https://travis-ci.org/lorenzolucido/ScalaCVX.svg?branch=master)](https://travis-ci.org/lorenzolucido/ScalaCVX)  [![Coverage Status](https://coveralls.io/repos/lorenzolucido/ScalaCVX/badge.svg?branch=master&service=github)](https://coveralls.io/github/lorenzolucido/ScalaCVX?branch=master)
 
-##### Version: 0.0.1
+##### Version: 0.0.2
 An implementation of CVX (Convex Optimization) framework in Scala programming language.
 
 The project is in early development stage.

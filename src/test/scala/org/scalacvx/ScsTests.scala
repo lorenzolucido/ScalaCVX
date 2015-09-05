@@ -10,7 +10,7 @@ import org.scs._
 
 
 
-class ScsTest extends FlatSpec with Matchers {
+class ScsTests extends FlatSpec with Matchers {
 
   val isolver = new IndirectSolver
   val dsolver = new DirectSolver
