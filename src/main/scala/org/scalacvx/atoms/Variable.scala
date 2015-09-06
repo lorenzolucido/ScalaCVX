@@ -7,7 +7,7 @@ import org.scalacvx.dcp._
 /**
  * Created by lorenzo on 8/16/15.
  */
-case class Variable(size:(Int,Int), sign:Sign=NoSign, value:Option[DenseMatrix[Double]]=None) extends Expression {
+case class Variable(size:(Int,Int), sign:Sign=NoSign, value:Option[DenseMatrix[Double]]=None) extends AffineExpression {
 
   override val children = None
   override val curvature: Vexity = AffineVexity

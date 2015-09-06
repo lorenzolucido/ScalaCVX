@@ -1,7 +1,7 @@
 package org.scalacvx.atoms.affine
 
 import breeze.linalg.DenseMatrix
-import org.scalacvx.atoms.Expression
+import org.scalacvx.atoms.{AffineExpression, Expression}
 import org.scalacvx.conic.ConicForm
 import org.scalacvx.dcp._
 
@@ -21,4 +21,9 @@ case class AddAtom(lhs:Expression, rhs:Expression) extends Expression {
   override lazy val evaluate: DenseMatrix[Double] = lhs.evaluate + rhs.evaluate
   override val curvature: Vexity = ConstantVexity
 
+  override def toString = lhs.toString + " + " + rhs.toString
+}
+
+object AddAtom {
+  def apply(lhs:AffineExpression, rhs:AffineExpression) = new AddAtom(lhs, rhs) with AffineExpression
 }

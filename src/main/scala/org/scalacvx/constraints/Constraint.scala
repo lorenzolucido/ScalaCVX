@@ -1,6 +1,6 @@
 package org.scalacvx.constraints
 
-import org.scalacvx.atoms.{Constant, Variable, Expression}
+import org.scalacvx.atoms.{Expression}
 import org.scalacvx.conic.{ConeType, ConicForm}
 import org.scalacvx.dcp._
 
