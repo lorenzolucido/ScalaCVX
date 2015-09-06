@@ -14,6 +14,8 @@ trait Expression {
 
   case class ChildExpression(expr: Expression, mon:Monotonicity)
 
+  val untyped = this.asInstanceOf[Expression]
+
   val size: (Int, Int)
   val children:Option[Array[ChildExpression]]
 
@@ -31,17 +33,17 @@ trait Expression {
     if (children.isDefined) children.get.foldLeft[ConicForm](canonicalize) { (v, e) => v + e.expr.conicForm } else canonicalize
 
   // Constraints
-  def ==(that:Expression) = EqualityConstraint(this, that)
-  def <=(that:Expression) = LtConstraint(this, that)
+  def ==(that:Expression) = EqualityConstraint(this.asInstanceOf[Expression], that)
+  def <=(that:Expression) = LtConstraint(this.asInstanceOf[Expression], that)
   def ≤(that:Expression) = this <= that
-  def <(that:Expression) = LtConstraint(this, that)
-  def >(that:Expression) = GtConstraint(this, that)
-  def >=(that:Expression) = GtConstraint(this, that)
+  def <(that:Expression) = LtConstraint(this.asInstanceOf[Expression], that)
+  def >(that:Expression) = GtConstraint(this.asInstanceOf[Expression], that)
+  def >=(that:Expression) = GtConstraint(this.asInstanceOf[Expression], that)
   def ≥(that:Expression) = this >= that
 
   // Implemented atoms
-  def unary_- = NegateAtom(this)
-  def +(that:Expression) = AddAtom(this, that)
+  def unary_- = NegateAtom(this.asInstanceOf[Expression])
+  def +(that:Expression) = AddAtom(this.asInstanceOf[Expression], that)
   def -(that:Expression) = this + (-that)
 
 }
