@@ -10,7 +10,7 @@ import org.scalatest._
 
 class DcpTests extends FlatSpec with Matchers {
 
-  "A vexity" should "verify" in {
+  "The set of rules for vexities" should "verify" in {
     - ConvexVexity should be (ConcaveVexity)
     - ConcaveVexity should be (ConvexVexity)
     ConcaveVexity + AffineVexity should be (ConcaveVexity)
@@ -18,7 +18,7 @@ class DcpTests extends FlatSpec with Matchers {
     - ConcaveVexity - ConcaveVexity should be (ConvexVexity)
     - AffineVexity - ConstantVexity should be (AffineVexity)
     ConvexVexity + NotDcp should be (NotDcp)
-
+    - AffineVexity + ConstantVexity + ConvexVexity should be (ConvexVexity)
   }
 
 }

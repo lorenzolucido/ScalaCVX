@@ -1,6 +1,6 @@
 package org.scalacvx.atoms.affine
 
-import org.scalacvx.atoms.Expression
+import org.scalacvx.atoms.{Expression}
 import org.scalacvx.dcp._
 
 /**
@@ -16,6 +16,6 @@ case class NegateAtom(expr:Expression) extends Expression {
   override lazy val evaluate = - expr.evaluate
   override val curvature: Vexity = ConstantVexity
 
-
+  override def toString = "-" + expr.toString
 }
 

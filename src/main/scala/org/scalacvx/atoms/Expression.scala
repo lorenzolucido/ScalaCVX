@@ -33,9 +33,11 @@ trait Expression {
   // Constraints
   def ==(that:Expression) = EqualityConstraint(this, that)
   def <=(that:Expression) = LtConstraint(this, that)
+  def ≤(that:Expression) = this <= that
   def <(that:Expression) = LtConstraint(this, that)
   def >(that:Expression) = GtConstraint(this, that)
   def >=(that:Expression) = GtConstraint(this, that)
+  def ≥(that:Expression) = this >= that
 
   // Implemented atoms
   def unary_- = NegateAtom(this)
@@ -48,4 +50,18 @@ object Expression {
   def abs(expr:Expression) = AbsAtom(expr)
   def sum(exprs:Expression*):Expression = if(exprs.size == 1) exprs(0) else exprs(0) + sum(exprs.drop(1):_*)
   //def sum(lexp:Seq[Expression]):Expression = sum(lexp:_*)
+}
+
+trait ConvexExpression extends Expression {
+  override lazy val vexity = ConvexVexity
+}
+
+trait AffineExpression extends ConvexExpression {
+  override lazy val vexity = AffineVexity
+  def +(that:AffineExpression) = AddAtom(this, that)
+  def +(that:ConvexExpression) = AddAtom(this, that)
+}
+
+trait ConstantExpression extends AffineExpression {
+  //def +[T<:Expression](that:T) = AddAtom(this, that)
 }

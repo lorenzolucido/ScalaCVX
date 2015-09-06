@@ -16,5 +16,5 @@ case class AbsAtom(expr:Expression) extends Expression {
 
   override lazy val canonicalize = ???
 
-
+  override def toString = "|" + expr.toString + "|"
 }

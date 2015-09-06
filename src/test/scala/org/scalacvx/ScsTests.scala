@@ -63,8 +63,8 @@ class ScsTests extends FlatSpec with Matchers {
     val sol = coneProg.solve
 
     sol.getInfo.getStatus should be("Solved")           // Problem status
-    roundAt(sol.getInfo.getPobj,2) should equal(-0.25)  // Optimal value
     roundAt(sol.getX()(0),2) should equal(-0.5)         // Value of X that minimizes the problem
+    roundAt(sol.getInfo.getPobj,2) should equal(-0.25)  // Optimal value
   }
 
 
