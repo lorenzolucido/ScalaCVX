@@ -42,7 +42,7 @@ trait Expression {
   // Implemented atoms
   def unary_- = NegateAtom(this)
   def +(that:Expression) = AddAtom(this, that)
-  def -(that:Expression) = AddAtom(this, -that)
+  def -(that:Expression) = this + (-that)
 
 }
 
@@ -52,6 +52,8 @@ object Expression {
   //def sum(lexp:Seq[Expression]):Expression = sum(lexp:_*)
 }
 
+
+trait Vex
 trait ConvexExpression extends Expression {
   override lazy val vexity = ConvexVexity
 }
