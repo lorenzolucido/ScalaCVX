@@ -27,6 +27,12 @@ libraryDependencies  ++= Seq(
   "org.scalanlp" %% "breeze-viz" % "0.11.2"
 )
 
+scalacOptions in ThisBuild ++= Seq("-language:existentials")
+// This is added in order to fix:
+// inferred existential type *****, which cannot be expressed by wildcards,  should be enabled
+// [warn] by making the implicit value scala.language.existentials visible.
+
+
 ScoverageSbtPlugin.ScoverageKeys.coverageMinimum := 70
 
 ScoverageSbtPlugin.ScoverageKeys.coverageFailOnMinimum := false

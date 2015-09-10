@@ -1,7 +1,7 @@
 package org.scalacvx
 
 import org.scalacvx.atoms.Variable
-import org.scalacvx.atoms.Expression._
+import org.scalacvx.atoms.ExpressionImplicits._
 import org.scalacvx.dcp.{ConvexVexity, AffineVexity}
 import org.scalatest.{Matchers, FlatSpec}
 

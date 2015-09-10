@@ -25,9 +25,17 @@ sealed trait Vexity {
 
 }
 
-case object ConstantVexity extends Vexity
-case object AffineVexity extends Vexity
-case object ConvexVexity extends Vexity
-case object ConcaveVexity extends Vexity
+trait ConvexVexity extends Vexity
+case object ConvexVexity extends ConvexVexity
+
+trait ConcaveVexity extends Vexity
+case object ConcaveVexity extends ConcaveVexity
+
+trait AffineVexity extends ConvexVexity with ConcaveVexity
+case object AffineVexity extends AffineVexity
+
+trait ConstantVexity extends AffineVexity
+case object ConstantVexity extends ConstantVexity
+
 case object NotDcp extends Vexity
 

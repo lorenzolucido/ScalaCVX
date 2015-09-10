@@ -1,7 +1,8 @@
 package org.scalacvx
 
+
 import org.scalacvx.atoms.affine.AddAtom
-import org.scalacvx.atoms.{Expression, AffineExpression, Variable}
+import org.scalacvx.atoms._
 import org.scalatest.{Matchers, FlatSpec}
 
 /**
@@ -13,11 +14,21 @@ class ExpressionTests extends FlatSpec with Matchers {
     val x = Variable()
     val y = Variable()
 
-    x shouldBe an [AffineExpression]
-    y shouldBe an [AffineExpression]
-    AddAtom(x, y) shouldBe an [AffineExpression]
-    x + y shouldBe an [AffineExpression]
-
+    //x shouldBe an [Expression[Affine]]
+    //y shouldBe an [Expression[Affine]]
+    //AddAtom(x, y) shouldBe an [Expression[Affine]]
+    //x + y shouldBe an [Expression[Affine]]
   }
 
+  "An affine expression" should "by definition, be also convex" in {
+    val x = Variable()
+    //x shouldBe an [Expression[Affine]]
+    //x shouldBe an [Expression[Convex]]
+  }
+
+  "A convex expression" should "in the general case, not be affine" in {
+    val x = Variable()
+    //AbsAtom(x) shouldBe an [Expression[Convex]]
+    //AbsAtom(x) should not be an [Expression[Affine]]
+  }
 }
