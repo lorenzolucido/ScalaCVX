@@ -13,7 +13,7 @@ case class ConvexProblem(objective: Expression, constraints:Array[ComparisonCons
 
   // The conic form functon converts the current problem into an equivalent one
   // with linear function as objective subject to comparison and/or cone constraints
-  lazy val conicForm:ConicForm = ConicForm(objective, constraints)
+  lazy val conicForm:ConicForm = ??? // ConicForm(objective, constraints)
 
 
   def subjectTo(const:ComparisonConstraint) = ConvexProblem(objective, constraints :+ const)

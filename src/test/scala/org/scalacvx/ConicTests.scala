@@ -1,9 +1,6 @@
 package org.scalacvx
 
-import breeze.linalg.DenseMatrix._
-import breeze.linalg.{DenseVector, DenseMatrix}
 import org.scalacvx.atoms.Variable
-import org.scalacvx.conic.{ConeType, SecondOrderCone, ConicForm}
 import org.scalatest.{Matchers, FlatSpec}
 
 /**

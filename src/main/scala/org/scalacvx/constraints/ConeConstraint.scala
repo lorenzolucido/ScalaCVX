@@ -6,8 +6,22 @@ import org.scalacvx.dcp.AffineVexity
 /**
  * Created by lorenzo on 9/10/15.
  */
-trait ConeConstraint extends Constraint
+trait ConeConstraint extends Constraint {
+  require(lhs.forall(e => e.vexity.isInstanceOf[AffineVexity]), "All expressions must be affine in a cone constraint")
+  val lhs:Array[Expression]
+}
 
+/**     - Zero cone constraint -
+ *
+ *      Equivalent to Ax + b = 0
+ */
+case class ZeroConeConstraint(lhs:Array[Expression]) extends ConeConstraint
+
+/**     - Non-negative orthant cone constraint -
+  *
+  *      Equivalent to Ax + b > 0
+  */
+case class NonNegativeOrthantConeConstraint(lhs:Array[Expression]) extends ConeConstraint
 
 /**
  *      - Second-order cone constraint -
@@ -17,9 +31,9 @@ trait ConeConstraint extends Constraint
  *      The constraint is defined as:
  *      ∀i, ||lhs(i)||_2 ≤ rhs
  */
-case class SocConstraint(lhs:Array[Expression], rhs:Expression) {
+case class SocConstraint(lhs:Array[Expression], rhs:Expression) extends ConeConstraint {
   require(lhs.size >= 1)
-  require((lhs:+rhs).forall(e => e.vexity.isInstanceOf[AffineVexity]), "SoC constraint: all expressions must be affine.")
+  require(rhs.vexity.isInstanceOf[AffineVexity], "SoC constraint: rhs must be affine.")
 }
 
 
@@ -28,4 +42,4 @@ case class SocConstraint(lhs:Array[Expression], rhs:Expression) {
  *
  *
  */
-class SdpConstraint extends ConeConstraint
+case class SdpConeConstraint(lhs:Array[Expression]) extends ConeConstraint
