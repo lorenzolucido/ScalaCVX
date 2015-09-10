@@ -1,6 +1,6 @@
 package org.scalacvx.atoms.affine
 
-import org.scalacvx.atoms.{Expression}
+import org.scalacvx.atoms.Expression
 import org.scalacvx.dcp._
 
 /**

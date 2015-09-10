@@ -1,10 +1,11 @@
 package org.scalacvx
 
 import org.scalacvx.atoms.{Constant, Variable}
-import org.scalacvx.dcp.{NotDcp, ConvexVexity}
+import org.scalacvx.constraints.{GtConstraint, EqualityConstraint}
+import org.scalacvx.dcp.{AffineVexity, NotDcp, ConvexVexity}
 import org.scalatest.{Matchers, FlatSpec}
-import org.scalacvx.Problem._
-import org.scalacvx.atoms.Expression._
+import org.scalacvx.ConvexProblem._
+import org.scalacvx.atoms.ExpressionImplicits._
 
 /**
  * Created by lorenzo on 8/23/15.
@@ -15,10 +16,13 @@ class ProblemTests extends FlatSpec with Matchers {
 
     val x = Variable()
 
-    val validProblem = minimize(abs(x)) subjectTo (x >= Constant(0))
-    validProblem.vexity shouldBe ConvexVexity
+    abs(x).vexity shouldBe ConvexVexity
+    (x >= 0.0) shouldBe a [GtConstraint]
 
-    val invalidProblem = maximize(abs(x)) subjectTo (x < Constant(0))
-    an [Exception] should be thrownBy (invalidProblem.vexity)
+    val validProblem = minimize(abs(x)) subjectTo (x >= 0.0)
+    validProblem shouldBe a [ConvexProblem]
+
+    //val invalidProblem =
+    an [IllegalArgumentException] should be thrownBy (maximize(abs(x)) subjectTo (x < 0.0)) //
   }
 }

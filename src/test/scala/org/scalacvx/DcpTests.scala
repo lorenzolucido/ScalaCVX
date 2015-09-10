@@ -21,4 +21,15 @@ class DcpTests extends FlatSpec with Matchers {
     - AffineVexity + ConstantVexity + ConvexVexity should be (ConvexVexity)
   }
 
+  "An affine expression" should "be both concave and convex" in {
+    AffineVexity shouldBe a [ConcaveVexity]
+    AffineVexity shouldBe a [ConvexVexity]
+    AffineVexity should not be a [ConstantVexity]
+  }
+
+  "A constant expression" should "be also affine" in {
+    ConstantVexity shouldBe a [ConstantVexity]
+    ConstantVexity shouldBe an [AffineVexity]
+  }
+
 }

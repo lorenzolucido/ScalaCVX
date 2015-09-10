@@ -1,9 +1,10 @@
 package org.scalacvx
 
 import org.scalacvx.atoms.Variable
+import org.scalacvx.constraints.{GtConstraint, LtConstraint, EqualityConstraint}
 import org.scalacvx.dcp.{ConcaveVexity, ConvexVexity, AffineVexity}
 import org.scalatest.{Matchers, FlatSpec}
-import org.scalacvx.atoms.Expression._
+import org.scalacvx.atoms.ExpressionImplicits._
 
 /**
  * Created by lorenzo on 8/23/15.
@@ -16,9 +17,9 @@ class ConstraintTests extends FlatSpec with Matchers {
   val xMat = Variable(3,2)
 
   "A constraint" should "have appropriate vexity" in {
-    (xVar == yVar).vexity shouldBe AffineVexity
-    (abs(xVar) < yVar).vexity shouldBe ConvexVexity
-    (-xVar >= abs(yVar)).vexity shouldBe ConcaveVexity
+    (xVar == yVar) shouldBe an [EqualityConstraint]
+    (abs(xVar) < yVar) shouldBe a [LtConstraint]
+    (-xVar >= abs(yVar)) shouldBe a [GtConstraint]
   }
 
   "A constraint" should "require identical dimensions of both sides" in {
