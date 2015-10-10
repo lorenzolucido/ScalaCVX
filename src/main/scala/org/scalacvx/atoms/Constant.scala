@@ -7,17 +7,27 @@ import org.scalacvx.dcp._
 /**
  * Created by lorenzo on 8/18/15.
  */
-case class Constant(value:DenseMatrix[Double], override val sign:Sign) extends Expression {
-  override val size: (Int,Int) = (value.rows, value.cols)
-  //override val length: Int = size._1 * size._2
-  override val children = None
+case class Constant(value:DenseMatrix[Double], override val sign:Sign=NoSign) extends AffineExpressionAbstract {
+  val vars = List()
+  val const = this // Can we do better here ?
 
-  def Constant(x:Double, checkSign:Boolean=true) = ???
+  override val size: (Int,Int) = (value.rows, value.cols)
+
+  //override val children = None
+
+  //def Constant(x:Double, checkSign:Boolean=true) = ???
 
   override lazy val vexity: Vexity = ConstantVexity
-  override val curvature = NotDcp // Should never reach here: a constant is not a function
+  //override val curvature = NotDcp // Should never reach here: a constant is not a function
 
-  override val evaluate = value
+  //override lazy val evaluate = value
 
-  override lazy val canonicalize = ??? //ConicForm(this)
+  override def unary_-():Constant = Constant(-value)
+  def +(that:Constant):Constant = Constant(value + that.value)
+
+  //override lazy val canonicalize = ??? //ConicForm(this)
+}
+
+object Constant{
+  def apply(num:Double):Constant = Constant(DenseMatrix(num))
 }

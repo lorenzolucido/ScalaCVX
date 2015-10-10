@@ -3,6 +3,7 @@ package org.scalacvx
 
 import org.scalacvx.atoms.affine.AddAtom
 import org.scalacvx.atoms._
+import org.scalacvx.dcp.ConvexVexity
 import org.scalatest.{Matchers, FlatSpec}
 
 /**
@@ -11,18 +12,19 @@ import org.scalatest.{Matchers, FlatSpec}
 class ExpressionTests extends FlatSpec with Matchers {
 
   "The sum of two affine expression" should "be an affine expression" in {
-    val x = Variable()
-    val y = Variable()
+    val x = Variable(2)
+    val y = Variable(2)
 
-    //x shouldBe an [Expression[Affine]]
+    x shouldBe an [AffineExpressionAbstract]
     //y shouldBe an [Expression[Affine]]
-    //AddAtom(x, y) shouldBe an [Expression[Affine]]
-    //x + y shouldBe an [Expression[Affine]]
+    x + y shouldBe an [AffineExpression]
+    -x shouldBe an [AffineExpression]
+    (-x).size shouldBe x.size
   }
 
   "An affine expression" should "by definition, be also convex" in {
     val x = Variable()
-    //x shouldBe an [Expression[Affine]]
+    x.vexity shouldBe an [ConvexVexity]
     //x shouldBe an [Expression[Convex]]
   }
 

@@ -1,7 +1,7 @@
 package org.scalacvx.conic
 
 import breeze.linalg.{DenseMatrix, DenseVector}
-import org.scalacvx.atoms.Expression
+import org.scalacvx.atoms.{AffineExpressionAbstract, AffineExpression, Expression}
 import org.scalacvx.constraints.{ComparisonConstraint, ConeConstraint, Constraint}
 import org.scalacvx.dcp.{ConstantVexity, AffineVexity}
 //import org.scalacvx.atoms.Expression._
@@ -25,7 +25,7 @@ import org.scalacvx.conic.ConicForm._
  */
 
 
-case class ConicForm(objective:Expression, coneConstraints:Array[ConeConstraint]=Array()){
+case class ConicForm(objective:AffineExpressionAbstract, coneConstraints:Array[ConeConstraint]=Array()){
   require(objective.vexity.isInstanceOf[AffineVexity], "Objective of graph form of expression must be affine.")
 
   val canonicalize:ConicForm = objective.canonicalize //+ sum(constraints.map(c => c.expression.canonicalize):_*)

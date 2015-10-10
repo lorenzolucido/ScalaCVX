@@ -40,9 +40,9 @@ trait Expression {
   def ≥(that:Expression) = this >= that
 
   // Implemented atoms
-  def unary_- = NegateAtom(this)
-  def +(that:Expression) = AddAtom(this, that)
-  def -(that:Expression) = this + (-that)
+  def unary_-():Expression = NegateAtom(this)
+  def +(that:Expression):Expression = AddAtom(this, that)
+  def -(that:Expression):Expression = this + (-that)
 
 }
 
