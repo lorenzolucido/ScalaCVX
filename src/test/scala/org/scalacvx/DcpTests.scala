@@ -32,4 +32,8 @@ class DcpTests extends FlatSpec with Matchers {
     ConstantVexity shouldBe an [AffineVexity]
   }
 
+  "[TYPES] Compiler" should "accept valid DCP expressions" in {
+    //implicitly[NonIncreasingType#unary_- <:< NonDecreasingType]
+  }
+
 }

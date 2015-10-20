@@ -9,7 +9,7 @@ import scala.util.Random
 /**
  * Created by lorenzo on 8/16/15.
  */
-case class Variable(sizeVar:(Int,Int)=(1,1), name:String) extends AffineExpressionAbstract {
+case class Variable(sizeVar:(Int,Int)=(1,1), name:String) extends Expression[Affine] {
 
   override val sign:Sign=NoSign
   override val size = sizeVar

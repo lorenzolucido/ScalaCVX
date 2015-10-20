@@ -2,13 +2,15 @@ package org.scalacvx.atoms
 
 import breeze.linalg.DenseMatrix
 import org.scalacvx.conic.ConicForm
-import org.scalacvx.dcp.{NoSign, AffineVexity, Sign, Vexity}
+import org.scalacvx.dcp._
 
 /**
  * Affine expressions are a particular type of expressions.
  * TBD: Show that (AffineExpression, +, *) is a ring.
  */
-abstract class AffineExpressionAbstract extends Expression {
+
+abstract class AffineExpressionAbstract extends Expression[Affine] {
+  /*
   val vars:List[(Constant,Variable)]
   val const:Constant
 
@@ -28,10 +30,11 @@ abstract class AffineExpressionAbstract extends Expression {
 
   require(vars.forall(cv => cv._1.size == cv._2.size) && vars.forall(cv => cv._1.size == const.size), "Affine expression: sizes do no match")
   //
+  */
 }
 
+/*
 case class AffineExpression(vars:List[(Constant,Variable)], const:Constant) extends AffineExpressionAbstract {
   //require(vars.map(_._2).forall(_.size == (1,1)), "Affine expression should take only single variables")
-
-
 }
+*/
