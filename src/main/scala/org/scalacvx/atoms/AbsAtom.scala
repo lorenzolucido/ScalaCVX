@@ -7,8 +7,11 @@ import org.scalacvx.dcp._
 /**
  * Created by lorenzo on 8/18/15.
  */
-case class AbsAtom[V <: Vexity, T](expr:Expression[V]) extends Expression[V] { // Expression[V] is wrong
+case class AbsAtom[V <: Vexity, Out <: Vexity](expr:Expression[V])
+                                              (implicit ev: MultVexMon[V,AbsAtom[_,_]#M] => Out)
+                                                extends Expression[Out] { // Expression[V] is wrong
 
+  type M = NonDecreasing
   //override val size: (Int, Int) = expr.size
   //override val sign: Sign = Positive
   //override lazy val evaluate: DenseMatrix[Double] = abs(expr.evaluate)

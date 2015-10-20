@@ -7,7 +7,7 @@ import org.scalatest.{Matchers, FlatSpec}
  * Created by lorenzo on 8/23/15.
  */
 class VariableTests extends FlatSpec with Matchers {
-
+  /*
   "A variable" should "return proper sizes and length" in {
 
     val x = Variable(2,3)
@@ -25,4 +25,5 @@ class VariableTests extends FlatSpec with Matchers {
     z.size shouldBe (1,1)
 
   }
+  */
 }

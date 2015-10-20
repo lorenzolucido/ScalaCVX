@@ -1,22 +1,23 @@
 package org.scalacvx.constraints
 
 import org.scalacvx.atoms.Expression
-import org.scalacvx.dcp.{ConcaveVexity, ConvexVexity, AffineVexity}
 
 /**
  * Created by lorenzo on 9/10/15.
  */
 trait ComparisonConstraint extends Constraint {
-  require(lhs.size == rhs.size,
-    s"Cannot create equality constraint between expressions of size ${lhs.size} and ${rhs.size}")
+  //require(lhs.size == rhs.size,
+  //  s"Cannot create equality constraint between expressions of size ${lhs.size} and ${rhs.size}")
 
-  val lhs: Expression
-  val rhs: Expression
+  //val lhs: Expression
+  //val rhs: Expression
 }
 
+/*
 case class EqualityConstraint(lhs:Expression, rhs:Expression) extends ComparisonConstraint {
-  require(List(lhs,rhs).forall(e => e.vexity.isInstanceOf[AffineVexity]),
-    s"Cannot create equality constraint: ${lhs.vexity} == ${rhs.vexity} (must be AffineVexity == AffineVexity")
+
+  //require(List(lhs,rhs).forall(e => e.vexity.isInstanceOf[AffineVexity]),
+  //  s"Cannot create equality constraint: ${lhs.vexity} == ${rhs.vexity} (must be AffineVexity == AffineVexity")
 
   /*
   override val expression = lhs - rhs
@@ -30,11 +31,12 @@ case class EqualityConstraint(lhs:Expression, rhs:Expression) extends Comparison
 }
 
 case class LtConstraint(lhs:Expression, rhs:Expression) extends ComparisonConstraint {
-  require(lhs.vexity.isInstanceOf[ConvexVexity] && rhs.vexity.isInstanceOf[ConcaveVexity],
-    s"Cannot create inequality constraint: ${lhs.vexity} < ${rhs.vexity} (must be ConvexVexity < ConcaveVexity")
+  //require(lhs.vexity.isInstanceOf[ConvexVexity] && rhs.vexity.isInstanceOf[ConcaveVexity],
+  //  s"Cannot create inequality constraint: ${lhs.vexity} < ${rhs.vexity} (must be ConvexVexity < ConcaveVexity")
 }
 
 case class GtConstraint(lhs:Expression, rhs:Expression) extends ComparisonConstraint {
-  require(lhs.vexity.isInstanceOf[ConcaveVexity] && rhs.vexity.isInstanceOf[ConvexVexity],
-    s"Cannot create inequality constraint: ${lhs.vexity} > ${rhs.vexity} (must be ConcaveVexity > ConvexVexity")
+  //require(lhs.vexity.isInstanceOf[ConcaveVexity] && rhs.vexity.isInstanceOf[ConvexVexity],
+  //  s"Cannot create inequality constraint: ${lhs.vexity} > ${rhs.vexity} (must be ConcaveVexity > ConvexVexity")
 }
+*/

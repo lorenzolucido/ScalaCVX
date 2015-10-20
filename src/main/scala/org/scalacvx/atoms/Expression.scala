@@ -62,7 +62,8 @@ trait Expression[V <: Vexity] {
 
 
 object ExpressionImplicits {
-  def abs[V <: Convex](expr: Expression[V]) = AbsAtom(expr)
+  def abs[V <: Convex, Out <: Vexity](expr: Expression[V])
+                                     (implicit ev: MultVexMon[V,AbsAtom[_,_]#M] =:= Out):Expression[Out] = AbsAtom(expr)
 
   //def sum(exprs: Expression*): Expression = if (exprs.size == 1) exprs(0) else exprs(0) + sum(exprs.drop(1): _*)
 

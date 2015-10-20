@@ -51,7 +51,7 @@ class ExpressionTests extends FlatSpec with Matchers {
     val affPlusConvex:      Expression[Convex]      = affineExp + convexExp
     val affPlusConst:       Expression[Affine]      = affineExp + constantExp
     val constPlusConst:     Expression[ConstantVex] = constantExp + constantExp
-    val absConvex = abs(affPlusConvex)
+    //val absConvex = abs(affPlusConvex)
   }
 
   "A constant" should "verify" in {

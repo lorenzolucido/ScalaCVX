@@ -1,8 +1,6 @@
 package org.scalacvx
 
 import org.scalacvx.atoms.Variable
-import org.scalacvx.constraints.{GtConstraint, LtConstraint, EqualityConstraint}
-import org.scalacvx.dcp.{ConcaveVexity, ConvexVexity, AffineVexity}
 import org.scalatest.{Matchers, FlatSpec}
 import org.scalacvx.atoms.ExpressionImplicits._
 
@@ -10,7 +8,7 @@ import org.scalacvx.atoms.ExpressionImplicits._
  * Created by lorenzo on 8/23/15.
  */
 class ConstraintTests extends FlatSpec with Matchers {
-
+  /*
   val xVar = Variable(2)
   val yVar = Variable(2)
 
@@ -26,6 +24,6 @@ class ConstraintTests extends FlatSpec with Matchers {
     an [IllegalArgumentException] should be thrownBy (xMat <= xVar)
   }
 
-
+  */
 
 }

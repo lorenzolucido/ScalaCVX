@@ -1,9 +1,8 @@
 package org.scalacvx.conic
 
 import breeze.linalg.{DenseMatrix, DenseVector}
-import org.scalacvx.atoms.{AffineExpressionAbstract, AffineExpression, Expression}
+import org.scalacvx.atoms.{AffineExpressionAbstract, Expression}
 import org.scalacvx.constraints.{ComparisonConstraint, ConeConstraint, Constraint}
-import org.scalacvx.dcp.{ConstantVexity, AffineVexity}
 //import org.scalacvx.atoms.Expression._
 import org.scalacvx.conic.ConicForm._
 
@@ -26,6 +25,7 @@ import org.scalacvx.conic.ConicForm._
 
 
 case class ConicForm(objective:AffineExpressionAbstract, coneConstraints:Array[ConeConstraint]=Array()){
+  /*
   require(objective.vexity.isInstanceOf[AffineVexity], "Objective of graph form of expression must be affine.")
 
   val canonicalize:ConicForm = objective.canonicalize //+ sum(constraints.map(c => c.expression.canonicalize):_*)
@@ -38,11 +38,11 @@ case class ConicForm(objective:AffineExpressionAbstract, coneConstraints:Array[C
 
   def unary_- = ConicForm(- this.objective, this.coneConstraints)
   def -(that:ConicForm) = this + (-that)
-
+  */
 }
 
 object ConicForm {
-  def sum(c:ConicForm*):ConicForm = if(c.size == 1) c(0) else c(0) + sum(c.drop(1):_*)
+  //def sum(c:ConicForm*):ConicForm = if(c.size == 1) c(0) else c(0) + sum(c.drop(1):_*)
   //def sum(c:Seq[ConicForm]):ConicForm = sum(c:_*)
 }
 
