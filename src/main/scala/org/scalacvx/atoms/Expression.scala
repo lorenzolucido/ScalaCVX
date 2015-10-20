@@ -12,20 +12,20 @@ trait Expression[V <: Vexity] {
 
   case class ChildExpression[C <: Vexity](expr: Expression[C], mon: Monotonicity)
 
-  val size: (Int, Int) = ???
-  val children: Option[Array[ChildExpression[_]]] = ???
+  //val size: (Int, Int) = ???
+  //val children: Option[Array[ChildExpression[_]]] = ???
 
-  val evaluate: DenseMatrix[Double] = ???
-  val sign: Sign = ???
+  //val evaluate: DenseMatrix[Double] = ???
+  //val sign: Sign = ???
 
-  val canonicalize: ConicForm = ???
-  val curvature: Vexity = ???
+  //val canonicalize: ConicForm = ???
+  //val curvature: Vexity = ???
 
-  lazy val length = size._1 * size._2
+  //lazy val length = size._1 * size._2
   //lazy val vexity: Vexity =
   //  if (children.isDefined) children.get.foldLeft[Vexity](curvature) { (v, e) => v + e.mon * e.expr.vexity } else curvature
 
-  lazy val conicForm: ConicForm = ???
+  //lazy val conicForm: ConicForm = ???
     //if (children.isDefined) children.get.foldLeft[ConicForm](canonicalize) { (v, e) => v + e.expr.conicForm } else canonicalize
 
   // Constraints
@@ -45,7 +45,7 @@ trait Expression[V <: Vexity] {
   def ≥(that: Expression) = this >= that
   */
 
-  // Implemented atoms
+  // Implemented atoms -- 1 --
   def unary_-[Out <: Vexity](implicit ev: Neg[V] => Out) : Expression[Out] = NegateAtom(this)
 
   def +[W <: Vexity, Out <: Vexity](that: Expression[W])
@@ -62,8 +62,9 @@ trait Expression[V <: Vexity] {
 
 
 object ExpressionImplicits {
-  def abs[V <: Convex, Out <: Vexity](expr: Expression[V])
-                                     (implicit ev: MultVexMon[V,AbsAtom[_,_]#M] =:= Out):Expression[Out] = AbsAtom(expr)
+  // Implemented atoms -- 2 --
+  def abs[V <: Vexity, Out <: Vexity](expr: Expression[V])
+                                     (implicit ev: MultVexMon[V,AbsAtom[_,_]#M] => Out):Expression[Out] = AbsAtom(expr)
 
   //def sum(exprs: Expression*): Expression = if (exprs.size == 1) exprs(0) else exprs(0) + sum(exprs.drop(1): _*)
 

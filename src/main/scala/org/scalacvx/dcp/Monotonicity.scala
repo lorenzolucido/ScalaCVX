@@ -39,7 +39,7 @@ object MultVexMon {
   implicit def multNonDec[V <: Vexity, M <: NonDecreasing](a: MultVexMon[V,M]): V = ???
   implicit def multNonInc[V <: Vexity, M <: NonDecreasing, Out <: Vexity](a: MultVexMon[V,M])
                                                                          (implicit ev: Neg[V] =:= Out): Out = ???
-  implicit def multNonMon[V <: Affine, M <: Monotonicity](a: MultVexMon[V,M]): V = ???
+  //implicit def multNonMon[V <: Affine, M <: Monotonicity](a: MultVexMon[V,M]): V = ???
 }
 
 trait NonIncreasing extends Monotonicity

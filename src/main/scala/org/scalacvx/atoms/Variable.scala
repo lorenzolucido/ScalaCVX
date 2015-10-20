@@ -1,10 +1,6 @@
 package org.scalacvx.atoms
 
-import breeze.linalg.DenseMatrix
-import org.scalacvx.conic.ConicForm
 import org.scalacvx.dcp._
-import org.scalacvx.atoms.ExpressionImplicits._
-import scala.util.Random
 
 /**
  * Created by lorenzo on 8/16/15.

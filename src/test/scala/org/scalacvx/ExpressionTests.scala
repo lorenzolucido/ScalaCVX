@@ -44,6 +44,7 @@ class ExpressionTests extends FlatSpec with Matchers {
     val affineExp = new Expression[Affine] {}
     val constantExp = new Expression[ConstantVex] {}
 
+    val nn = - concaveExp
 
     val negConcaveExp:      Expression[Convex]      = - concaveExp
     val convexPlusConvex:   Expression[Convex]      = convexExp + negConcaveExp
@@ -51,11 +52,15 @@ class ExpressionTests extends FlatSpec with Matchers {
     val affPlusConvex:      Expression[Convex]      = affineExp + convexExp
     val affPlusConst:       Expression[Affine]      = affineExp + constantExp
     val constPlusConst:     Expression[ConstantVex] = constantExp + constantExp
-    //val absConvex = abs(affPlusConvex)
+
+    val absConvex = abs(affPlusConvex)
+    val absConcave = abs(concaveMinusConvex)
+    val absAffine = abs(affineExp)
+    val absConstant = abs(constantExp)
   }
 
   "A constant" should "verify" in {
-    val const = Constant(-3.3)
+    //val const = Constant(-3.3)
   }
 
 

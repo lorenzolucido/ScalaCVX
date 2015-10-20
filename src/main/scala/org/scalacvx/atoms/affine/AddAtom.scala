@@ -11,7 +11,7 @@ import org.scalacvx.dcp._
 case class AddAtom[L <: Vexity, R <: Vexity, Out <: Vexity](lhs:Expression[L], rhs:Expression[R])
                                                            //(implicit ev: Add[L,R] => Out)
                                                             extends Expression[Out] {
-  require(lhs.size == rhs.size) // -> Transform to type-level check ?
+  //require(lhs.size == rhs.size) // -> Transform to type-level check ?
 
   //override val size: (Int, Int) = lhs.size
   //override lazy val length: Int = lhs.length
@@ -27,6 +27,6 @@ case class AddAtom[L <: Vexity, R <: Vexity, Out <: Vexity](lhs:Expression[L], r
 }
 
 object AddAtom {
-  implicit def toExpr[L <: Vexity, R <: Vexity, Out <: Vexity](addAtom: AddAtom[L,R,Out]): Expression[Out] = ???
+  //implicit def toExpr[L <: Vexity, R <: Vexity, Out <: Vexity](addAtom: AddAtom[L,R,Out]): Expression[Out] = ???
 }
 

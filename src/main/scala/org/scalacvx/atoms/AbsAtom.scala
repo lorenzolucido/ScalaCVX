@@ -9,8 +9,8 @@ import org.scalacvx.dcp._
  */
 case class AbsAtom[V <: Vexity, Out <: Vexity](expr:Expression[V])
                                               (implicit ev: MultVexMon[V,AbsAtom[_,_]#M] => Out)
-                                                extends Expression[Out] { // Expression[V] is wrong
-
+                                                extends Expression[Out] {
+  type Curvature = Convex
   type M = NonDecreasing
   //override val size: (Int, Int) = expr.size
   //override val sign: Sign = Positive
