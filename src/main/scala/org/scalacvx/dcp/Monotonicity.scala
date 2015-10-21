@@ -33,11 +33,13 @@ object NegMon {
   implicit def negNonDec[A <: NonDecreasing](a: NegMon[A]): NonIncreasing = ???
 }
 
-trait MultVexMon[V <: Vexity, M <: Monotonicity]
+// Trait **:
+// Multiplies a Vexity by a Monotonicity
+trait **:[V <: Vexity, M <: Monotonicity]
 
-object MultVexMon {
-  implicit def multNonDec[V <: Vexity, M <: NonDecreasing](a: MultVexMon[V,M]): V = ???
-  implicit def multNonInc[V <: Vexity, M <: NonDecreasing, Out <: Vexity](a: MultVexMon[V,M])
+object **: {
+  implicit def multNonDec[V <: Vexity, M <: NonDecreasing](a: **:[V,M]): V = ???
+  implicit def multNonInc[V <: Vexity, M <: NonDecreasing, Out <: Vexity](a: **:[V,M])
                                                                          (implicit ev: Neg[V] =:= Out): Out = ???
   //implicit def multNonMon[V <: Affine, M <: Monotonicity](a: MultVexMon[V,M]): V = ???
 }

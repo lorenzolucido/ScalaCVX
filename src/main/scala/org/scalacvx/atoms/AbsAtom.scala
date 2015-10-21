@@ -8,7 +8,7 @@ import org.scalacvx.dcp._
  * Created by lorenzo on 8/18/15.
  */
 case class AbsAtom[V <: Vexity, Out <: Vexity](expr:Expression[V])
-                                              (implicit ev: MultVexMon[V,AbsAtom[_,_]#M] => Out)
+                                              (implicit ev: **:[V,AbsAtom[_,_]#M] => Out)
                                                 extends Expression[Out] {
   type Curvature = Convex
   type M = NonDecreasing

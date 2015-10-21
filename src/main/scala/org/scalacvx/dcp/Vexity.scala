@@ -5,13 +5,13 @@ package org.scalacvx.dcp
  */
 sealed trait Vexity
 
-trait Add[V <: Vexity, W <: Vexity] //{ type Apply <: Vexity }
+trait ++:[V <: Vexity, W <: Vexity] //{ type Apply <: Vexity }
 
-object Add {
-  implicit def conc[A <: Concave, B <: Concave](x: Add[A, B]): Concave = ???
-  implicit def conv[A <: Convex, B <: Convex](x: Add[A, B]): Convex = ???
-  implicit def aff[A <: Affine, B <: Affine](x: Add[A, B]): Affine = ???
-  implicit def const[A <: ConstantVex, B <: ConstantVex](x: Add[A, B]): ConstantVex = ???
+object ++: {
+  implicit def conc[A <: Concave, B <: Concave](x: ++:[A, B]): Concave = ???
+  implicit def conv[A <: Convex, B <: Convex](x: ++:[A, B]): Convex = ???
+  implicit def aff[A <: Affine, B <: Affine](x: ++:[A, B]): Affine = ???
+  implicit def const[A <: ConstantVex, B <: ConstantVex](x: ++:[A, B]): ConstantVex = ???
 }
 
 trait Neg[V <: Vexity]

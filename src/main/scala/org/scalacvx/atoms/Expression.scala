@@ -1,8 +1,6 @@
 package org.scalacvx.atoms
 
-import breeze.linalg.DenseMatrix
-import org.scalacvx.atoms.affine.{NegateAtom, AddAtom}
-import org.scalacvx.conic.ConicForm
+import org.scalacvx.atoms.affine.{AddAtom, NegateAtom}
 import org.scalacvx.dcp._
 
 /**
@@ -49,13 +47,13 @@ trait Expression[V <: Vexity] {
   def unary_-[Out <: Vexity](implicit ev: Neg[V] => Out) : Expression[Out] = NegateAtom(this)
 
   def +[W <: Vexity, Out <: Vexity](that: Expression[W])
-                                   (implicit ev: Add[V,W] => Out)
+                                   (implicit ev: V ++: W => Out)
                                    : Expression[Out]
                                     = AddAtom(this, that)
 
   def -[W <: Vexity, NegW <: Vexity, Out <: Vexity](that: Expression[W])(
     implicit  ev0: Neg[W] => NegW,
-              ev1: Add[V, NegW] => Out): Expression[Out]
+              ev1: V ++: NegW => Out): Expression[Out]
               = this + (-that)
 
 }
@@ -64,7 +62,8 @@ trait Expression[V <: Vexity] {
 object ExpressionImplicits {
   // Implemented atoms -- 2 --
   def abs[V <: Vexity, Out <: Vexity](expr: Expression[V])
-                                     (implicit ev: MultVexMon[V,AbsAtom[_,_]#M] => Out):Expression[Out] = AbsAtom(expr)
+                                     (implicit ev: V **: AbsAtom[_,_]#M => Out)
+  :Expression[Out] = AbsAtom(expr)
 
   //def sum(exprs: Expression*): Expression = if (exprs.size == 1) exprs(0) else exprs(0) + sum(exprs.drop(1): _*)
 
