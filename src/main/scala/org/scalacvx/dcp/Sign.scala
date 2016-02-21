@@ -77,6 +77,6 @@ object MultSignMon {
                                                                  (implicit ev:  NegMon[M] =:= Out): Out = ???
 }
 
-//trait UnknownSign extends Sign
+trait UnknownSign extends Sign
 trait Positive extends Sign
 trait Negative extends Sign

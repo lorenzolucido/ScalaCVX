@@ -12,6 +12,8 @@ case class AbsAtom[V <: Vexity, Out <: Vexity](expr:Expression[V])
                                                 extends Expression[Out] {
   type Curvature = Convex
   type M = NonDecreasing
+
+  //val children = Some(ChildExpression(expr, NonDecreasing))
   //override val size: (Int, Int) = expr.size
   //override val sign: Sign = Positive
   //override lazy val evaluate: DenseMatrix[Double] = abs(expr.evaluate)

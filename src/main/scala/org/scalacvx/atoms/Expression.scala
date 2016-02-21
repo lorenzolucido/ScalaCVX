@@ -11,7 +11,7 @@ trait Expression[V <: Vexity] {
   case class ChildExpression[C <: Vexity](expr: Expression[C], mon: Monotonicity)
 
   //val size: (Int, Int) = ???
-  //val children: Option[Array[ChildExpression[_]]] = ???
+  //val children: Option[Array[ChildExpression]] //= ???
 
   //val evaluate: DenseMatrix[Double] = ???
   //val sign: Sign = ???
@@ -67,8 +67,8 @@ trait Expression[V <: Vexity] {
 object ExpressionImplicits {
   // Implemented atoms -- 2 --
   def abs[V <: Vexity, Out <: Vexity](expr: Expression[V])
-                                     (implicit ev: V **: AbsAtom[_,_]#M => Out)
-  :Expression[Out] = AbsAtom(expr)
+                                     (implicit ev: V **: AbsAtom[_,_]#M => Out):Expression[Out]
+            = AbsAtom(expr)
 
   //def sum(exprs: Expression*): Expression = if (exprs.size == 1) exprs(0) else exprs(0) + sum(exprs.drop(1): _*)
 
