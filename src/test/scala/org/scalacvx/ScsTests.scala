@@ -15,7 +15,7 @@ class ScsTests extends FlatSpec with Matchers {
   val isolver = new IndirectSolver
   val dsolver = new DirectSolver
 
-  def roundAt(d:Double, at:Int) = Math.round(d * Math.pow(10,at)) / Math.pow(10,at)
+  def roundAt(d:Double, at:Int):Double = Math.round(d * Math.pow(10,at)) / Math.pow(10,at)
 
   "SCS solver" should "solve a random linear program" in {
     val nrows = 50

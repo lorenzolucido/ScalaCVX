@@ -8,12 +8,17 @@ sealed trait Vexity
 trait ++:[V <: Vexity, W <: Vexity] //{ type Apply <: Vexity }
 
 object ++: {
+  //implicit def nothing[V1 <: Vexity, V2 <: Vexity](a: V1 ++: V2): Vexity = ???
+
+  implicit def const[A <: ConstantVex, B <: ConstantVex](x: ++:[A, B]): ConstantVex = ???
+  implicit def aff[A <: Affine, B <: Affine](x: ++:[A, B]): Affine = ???
   implicit def conc[A <: Concave, B <: Concave](x: ++:[A, B]): Concave = ???
   implicit def conv[A <: Convex, B <: Convex](x: ++:[A, B]): Convex = ???
-  implicit def aff[A <: Affine, B <: Affine](x: ++:[A, B]): Affine = ???
-  implicit def const[A <: ConstantVex, B <: ConstantVex](x: ++:[A, B]): ConstantVex = ???
+
+
 }
 
+/*
 trait Neg[V <: Vexity]
 
 object Neg {
@@ -22,7 +27,7 @@ object Neg {
   implicit def negAffine[A <: Affine](x: Neg[A]): Affine = ???
   implicit def negConstant[A <: ConstantVex](x: Neg[A]): ConstantVex = ???
 }
-
+*/
 sealed trait Convex extends Vexity
 
 sealed trait Concave extends Vexity

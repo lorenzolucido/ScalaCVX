@@ -44,7 +44,7 @@ class ExpressionTests extends FlatSpec with Matchers {
     val affineExp = new Expression[Affine] {}
     val constantExp = new Expression[ConstantVex] {}
 
-    val nn = - concaveExp
+    val convexExpBis = - concaveExp
 
     val negConcaveExp:      Expression[Convex]      = - concaveExp
     val convexPlusConvex:   Expression[Convex]      = convexExp + negConcaveExp

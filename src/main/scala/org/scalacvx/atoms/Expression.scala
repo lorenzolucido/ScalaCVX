@@ -44,18 +44,23 @@ trait Expression[V <: Vexity] {
   */
 
   // Implemented atoms -- 1 --
-  def unary_-[Out <: Vexity](implicit ev: Neg[V] => Out) : Expression[Out] = NegateAtom(this)
+  def unary_-[Out0 <: Vexity]
+      (implicit ev0: V **: NonIncreasing => Out0): NegateAtom[V, Out0]
+                  = NegateAtom[V, Out0](this)
 
-  def +[W <: Vexity, Out <: Vexity](that: Expression[W])
-                                   (implicit ev: V ++: W => Out)
-                                   : Expression[Out]
-                                    = AddAtom(this, that)
+  def +[W <: Vexity, Out0 <: Vexity, Out1 <: Vexity, Out2 <: Vexity](that: Expression[W])
+  (implicit  ev0: V **: NonDecreasing => Out0,
+             ev1: W **: NonDecreasing => Out1,
+             ev2: Out0 ++: Out1 => Out2): AddAtom[V, W, Out2]
+                                 //  : Expression[Out]
+                                    = AddAtom[V, W, Out2](this, that)
 
-  def -[W <: Vexity, NegW <: Vexity, Out <: Vexity](that: Expression[W])(
-    implicit  ev0: Neg[W] => NegW,
-              ev1: V ++: NegW => Out): Expression[Out]
-              = this + (-that)
-
+  def -[W <: Vexity, Out0 <: Vexity, Out1 <: Vexity, Out2 <: Vexity, Out3 <: Vexity](that: Expression[W])
+    (implicit ev:  V **: NonDecreasing => Out0,
+              ev0: W **: NonIncreasing => Out1,
+              ev1: Out1 **: NonDecreasing => Out2,
+              ev2: Out0 ++: Out2 => Out3): AddAtom[V, Out1, Out3]
+              = this. +(that.unary_-[Out1])
 }
 
 

@@ -9,8 +9,10 @@ import org.scalacvx.dcp._
  * Created by lorenzo on 8/23/15.
  */
 case class AddAtom[L <: Vexity, R <: Vexity, Out <: Vexity](lhs:Expression[L], rhs:Expression[R])
-                                                           //(implicit ev: Add[L,R] => Out)
-                                                            extends Expression[Out] {
+                               //(implicit  ev0: R **: NonDecreasing => Out0,
+                               //           ev1: L **: NonDecreasing => Out1,
+                               //           ev2: ConstantVex ++: Out0 ++: Out1 => Out2)
+                                                               extends Expression[Out] {
   //require(lhs.size == rhs.size) // -> Transform to type-level check ?
 
   //override val size: (Int, Int) = lhs.size
